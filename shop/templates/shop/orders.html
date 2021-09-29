@@ -1,0 +1,15 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+    <h2 class="py-3" > My Orders </h2>
+    <div class="dropdown-divider"></div>
+    {% for order in orders %}
+        {% if order.product.name != None %}
+            <div class="container" >
+                <h4>{{order.product.name}} <small class="text-muted">| ${{order.product.price}}, ordered on {{order.date}}</small> </h4>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+
+{% endblock content %}

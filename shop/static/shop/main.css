@@ -1,0 +1,29 @@
+@media only screen and (max-width: 1400px) {
+  /* For smol desktop phones: */
+  [class*="col-"] {
+    width: 33% !important;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  /* For tablet phones: */
+  [class*="col-"] {
+    width: 50% !important;
+  }
+}
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="col-"] {
+    width: 100% !important;
+    
+  }
+}
+
+
+.contactUsStyling {
+  min-width: 900px !important;
+  min-height: 500px !important;
+}
+
+.contactUsStylingSubject {
+  height: 50px !important;
+}

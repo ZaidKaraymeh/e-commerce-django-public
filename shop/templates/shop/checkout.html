@@ -1,0 +1,57 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+
+    <div class="container" >
+        <div class="row">
+            <div class="col-8">
+                <h3>You are checking out the following products...</h3>
+                {% for product in products %}
+                    <ul class="list-unstyled my-4" >
+                        <li class="px-4">
+                            <h4 class="fw-normal" >
+                                {{product.item.name}}
+                                <small class="px-3 border border-2 border-top-0 border-end-0 border-bottom-0 "> ${{product.item.price}} </small>
+                            </h4>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                    </ul>
+                
+                {% endfor %}
+            </div>
+            <div class="col-4">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item ">
+                        <h5> Total Price: <small class="text-muted"> ${{total_price}} </small> </h5>
+                    </li>
+                    <li class="list-group-item ">
+                        <h5> Items: <small class="text-muted"> {{count}} </small> </h5>
+                    </li>
+                    <li class="list-group-item d-grid p-3 gap-2 ">
+                        <h5> You're delivering to... <small class="text-muted"> </small> </h5>
+                        <h5>  <small class="text-muted"> {{user.shippingAddress}} </small> </h5>
+                        <a 
+                            class="btn btn-dark  p-2 d-grid text-decoration-none"  
+                            href="{% url 'profile' %}">
+                            
+                            Change Shipping Address
+
+                        </a>
+                        <a 
+                            class="btn btn-dark  p-2 d-grid text-decoration-none"  
+                            href="{% url 'shop_setting_order' %}">
+                            
+                            Order Products
+
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+ 
+
+{% endblock content %}

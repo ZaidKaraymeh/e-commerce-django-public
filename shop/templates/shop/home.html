@@ -1,0 +1,23 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+    
+    
+    <div class="row">
+        {% for product in products %}
+            <div class="col-xl-3 col-lg-4 col-md-3 {% if "col-md-3" %} mb-4 d-flex justify-content-center {% endif %} ">
+                <div class="card m-2 " style="width: 18rem;">
+                    <a href="{% url 'shop_product' product.name product.id %}" ><img src="{{product.icon.url}}" class="card-img-top" alt="loading..."></a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text text-dark text-muted" >${{product.price}}</p>
+                    </div>
+                </div>
+            </div>
+        
+        
+        {% endfor %}
+    </div>
+{% endblock content %}
+
+
