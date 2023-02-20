@@ -1,0 +1,90 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+    <h2 class="py-3" > My Wishlist </h2>
+    <div class="dropdown-divider"></div>
+
+    {% for product in products %}
+    
+        <div class="row my-4">
+            <div class="card mb-3 container-fluid p-0 border-0" style="">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img 
+                        src="{{product.item.icon.url}}" 
+                        class="img-fluid rounded-start " 
+                        alt="..." />
+                    </div>
+                    <div class="col-md-4">
+                        
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item p-4">
+                                    <h3>{{product.item.name}}</h3>
+                                </li>
+                                <li class="list-group-item p-4"> {{product.item.description}} </li>
+                                {% comment %} <li class="list-group-item d-grid gap-2 ">
+                                
+                                    <div class="btn btn-dark btn-block "> 
+                                        Add to Cart  
+                                    </div>
+                                    <div class="btn btn-dark btn-block "> 
+                                        Add to Cart  
+                                    </div>
+                                
+                                </li> {% endcomment %}
+                            </ul>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+
+                                <li class="list-group-item ">
+                                    <h5> Price: <small class="text-muted" >${{product.item.price}} </small></h5>
+                                </li>
+                                <li class="list-group-item ">
+                                    {% if product.item.quantity > 0 %}
+                                        <h5> In Stock: <small class="text-muted"> In Stock </small> </h5>
+                                    {% else %}
+                                        <h5> In Stock: <small class="text-muted"> Out of Stock </small> </h5>
+                                    {% endif %}
+                                </li>
+                                <li class="list-group-item d-grid p-3 gap-2 ">
+                                    <a 
+                                        class="d-grid text-decoration-none btn btn-dark p-3"  
+                                        href="{% url 'shop_delete_item_wishlist' product.item.id %}">
+
+                                             Remove from Wishlist
+                                    </a>  
+                                    {% if product.item.quantity > 0 %}
+                                        <a 
+                                            class="d-grid text-decoration-none btn btn-dark p-3"  
+                                            href="{% url 'shop_add_item_cart' product.id %}">
+
+                                                Add to Cart
+                                        </a>  
+                                    {% else %}
+                                        <a 
+                                            class="d-grid text-decoration-none btn btn-dark p-3 disabled"  
+                                            href="">
+
+                                                Add to Cart
+                                        </a>  
+                                    {% endif %}
+                                </li>                                
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="dropdown-divider"></div>
+
+            
+        </div>
+    {% endfor %}
+
+{% endblock content %}

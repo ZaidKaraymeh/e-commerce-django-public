@@ -1,0 +1,28 @@
+{% extends "shop/base.html" %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container-fluid vh-70"
+         style="min-height: 70vh;"    >  
+        <h4 class="fw-normal p-2"> Username:  &nbsp;&nbsp;&nbsp;  
+            <small class="text-muted  " >{{user.username}}</small>
+        </h4>
+        <h4 class="fw-normal p-2"> Email:  &nbsp;&nbsp;&nbsp;  
+            <small class="text-muted  " >{{user.email}}</small>
+        </h4>
+
+
+        <form method="POST" class="p-2">
+             {% csrf_token %}
+            <fieldset class="form-group" > 
+                <legend> Shipping Address:  </legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button type="submit" class="btn btn-outline-secondary" > Submit </button>
+            </div>
+        </form>
+
+
+    </div>
+{% endblock content %}

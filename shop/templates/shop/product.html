@@ -1,0 +1,87 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+
+    <div class="row">
+        <div class="card mb-3 container-fluid p-0 border-0" style="">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img 
+                    src="{{product.icon.url}}" 
+                    class="img-fluid rounded-start " 
+                    alt="..." />
+                </div>
+                <div class="col-md-4">
+                    
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item p-4">
+                                <h3>{{product.name}}</h3>
+                            </li>
+                            <li class="list-group-item p-4"> {{product.description}} </li>
+                            {% comment %} <li class="list-group-item d-grid gap-2 ">
+                            
+                                <div class="btn btn-dark btn-block "> 
+                                    Add to Cart  
+                                </div>
+                                <div class="btn btn-dark btn-block "> 
+                                    Add to Cart  
+                                </div>
+                            
+                            </li> {% endcomment %}
+                        </ul>
+                        
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+
+                            <li class="list-group-item ">
+                                <h5> Price: <small class="text-muted" >${{product.price}} </small></h5>
+                            </li>
+                            <li class="list-group-item ">
+                                <h5> In Stock: 
+                                    <small class="text-muted">
+                                        {% if product.quantity > 0 %}
+                                            In Stock
+                                        {% else %}
+                                            Out of Stock
+                                        {% endif %}
+                                    </small> 
+                                </h5>
+                            </li>
+
+                            <li class="list-group-item d-grid p-3 gap-2 ">
+                                <a 
+                                    class="d-grid text-decoration-none btn btn-dark p-3"  
+                                    href="{% url 'shop_add_to_wishlist' product.id %}">
+
+                                            Add to Wishlist
+                                </a>  
+                                {% if product.quantity > 0 %}
+                                    <a 
+                                        class="d-grid text-decoration-none btn btn-dark p-3"  
+                                        href="{% url 'shop_add_item_cart' product.id %}">
+
+                                            Add to Cart
+                                    </a>  
+                                {% else %}
+                                    <a 
+                                        class="d-grid text-decoration-none btn btn-dark p-3 disabled"  
+                                        href="">
+
+                                            Add to Cart
+                                    </a>  
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+    </div>
+
+{% endblock content %}

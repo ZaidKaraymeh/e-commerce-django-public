@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5 h-100">
+  <div class="row justify-content-center align-items-center h-100">
+    {% if form.errors %}
+            <div class="alert alert-danger">
+                {{ form.errors }}
+            </div>
+    {% endif %}
+    <div class="col-12 col-lg-9 col-xl-7">
+      <div
+        class="card shadow-2-strong card-registration"
+        style="border-radius: 15px"
+      >
+        <div class="card-body p-4 p-md-5">
+          <p class="text-center h1 fw-bold mb-4 pb-2 pb-md-0 mb-md-5">
+            Create Your Account
+          </p>
+          <form method="POST">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  {{ form.first_name }}
+                  <label class="form-label" for="id_first_name">First Name</label>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  {{ form.last_name }}
+                  <label class="form-label" for="id_last_name">Last Name</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  {{ form.email }}
+                  <label class="form-label" for="id_email">Email</label>
+                </div>
+                
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  {{ form.phone_number }}
+                  <label class="form-label" for="id_phone_number">Phone number</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-5">
+              <div class="col-6">
+                <div class="form-outline">
+                  {{ form.password1 }}
+                  <label class="form-label" for="id_password1">Password</label>
+                </div>
+                <small class="text-left">
+                  Must have a minimum of 8 characters containing at least
+                  one uppercase (A-Z), one lowercase (a-z) and a number
+                  (0-9)
+                </small>
+              </div>
+              <div class="col-6">
+                <div class="form-outline">
+                  {{ form.password2 }}
+                  <label class="form-label" for="id_password2">Password Confirmation</label>
+                </div>
+                <small class="text-left">
+                  Enter the same password as before, for verification.
+                </small>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  {{ form.birth_date }}
+                  <label class="form-label" for="id_birth_date">Birth Date</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row text-muted mb-4">
+              <div class="col-12">
+                Already have an account?
+                <a class="ml-2" href="{% url 'login'  %}">Sign In</a>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+              <input class="btn btn-primary" type="submit" value="Register" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock content %}

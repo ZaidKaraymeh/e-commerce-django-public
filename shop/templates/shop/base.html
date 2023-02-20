@@ -1,0 +1,151 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="description" content="Enjoy shopping at Plinkershop!">
+    <meta property="og:title" content="Plinkershop &copy;" />
+    <meta property="og:url" content="https://e-commerce-django99.herokuapp.com/" />
+    <meta property="og:description" content="Enjoy shopping at Plinkershop!">
+    <meta property="og:image" content="https://i.imgur.com/QD7rWqH.png>
+
+    <!-- Bootstrap CSS -->
+  
+    <link rel="shortcut icon" type="image/x-icon" href="/media/images/favicon.ico" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'shop/main.css' %}" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {% if request.user.is_authenticated %}
+    
+        <title>{{request.user}} - Home</title>
+    {% else %}
+        <title>Home</title>
+    
+    {% endif %}
+  </head>
+  <body>
+    <nav class=" navbar navbar-expand-lg navbar-light bg-light p-4 ">
+      <div class="container-fluid " style="margin: 0 5% 0 5% !important ; " >
+        <a class="navbar-brand fs-3" href="{% url 'shop_home' %}">Plinkershop &copy;</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarColor03"
+          aria-controls="navbarColor03"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse fs-5" id="navbarColor03">
+          <ul class="navbar-nav me-auto ">
+
+            {% comment %} <li class="nav-item">
+              <a class="nav-link" href="#">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li> {% endcomment %}
+            {% comment %} <li class="nav-item">
+              <a class="nav-link" href="{% url 'shop_contact_us' %}">Contact Us</a>
+            </li> {% endcomment %}
+            
+          </ul>
+          <ul class="navbar-nav ms-auto m-0 p-0 ">
+            {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shop_cart' %}"><i class="fas fa-shopping-cart"></i> Cart</a>
+                </li>
+                <li class="nav-item dropdown ">
+                <a
+                    class="nav-link dropdown-toggle "
+                    data-bs-toggle="dropdown"
+                    href="#"
+                    role="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    ><i class="fas fa-user-circle"></i> Account</a
+                >
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'profile' %}"><i class="fas fa-user-circle"></i> Profile</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'shop_orders' %}"><i class="fas fa-download"></i> Orders</a>
+                      <a class="dropdown-item" href="{% url 'shop_wishlist' %}"><i class="fas fa-heart"></i> Wishlist</a>
+                      <a class="dropdown-item" href="{% url 'shop_contact_us' %}"><i class="fas fa-envelope"></i> Contact Us</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                  </div>
+
+                <li class="nav-item mx-1">
+                </li>
+            
+            {% else %}
+         
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+
+
+            {% endif %}
+
+            
+
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+
+    <main class="container pt-5 " style="min-height:80vh;" > 
+        {% if messages %} {% for message in messages %}
+            <div class="alert alert-dismissible alert-{{ message.tags }}">
+            
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+              <h5>{{message}}</h5>
+            
+            </div>
+        {% endfor %} {% endif %}
+        <div class="row">
+          <div>
+            {% block content %}{% endblock content %}
+          </div>
+          
+        </div>
+    </main>
+    <footer class="m-4  text-center ">
+      Plinkershop &copy;
+    </footer>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

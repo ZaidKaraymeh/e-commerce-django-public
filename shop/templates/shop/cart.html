@@ -1,0 +1,118 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+
+        {% if "col-xl"  %}
+        
+            <div class="row">   
+                <div class="col-xl-2 col-lg-1">
+                    <ul class="list-group list-group-flush">
+
+                
+                        <li class="list-group-item ">
+                            <h5> Total Price: <small class="text-muted"> ${{total_price}} </small> </h5>
+                        </li>
+                        <li class="list-group-item ">
+                            <h5> Items: <small class="text-muted"> {{count}} </small> </h5>
+                        </li>
+                        <li class="list-group-item d-grid p-3">
+                            {% if count == 0 %}
+                                <a 
+                                    class="btn btn-dark disabled p-2 d-grid text-decoration-none disabled "  
+                                    href="{% url 'shop_home'  %}"
+                                    aria-disabled="true">
+                                    
+                                    Proceed to Checkout
+
+                                </a>
+                            {% else %}
+                                <a 
+                                    class="btn btn-dark  p-2 d-grid text-decoration-none"  
+                                    href="{% url 'shop_cart_checkout' %}">
+                                    
+                                    Proceed to Checkout
+
+                                </a>
+                            {% endif %}
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-xl-10 col-lg-11">
+                    {% if count == 0 %}
+                        <h3 class="text-center" > Your cart is empty . . .</h3>
+                    {% endif %}
+                    {% for product in products %}
+                        <div class="row">
+                            <div class="card mb-3 container-fluid p-0 border-0 my-5  " style="">
+                                <div class="row g-0">
+                                    <div class="col-md-4 {% if 'col-sm' %} d-flex justify-content-center align-items-center{% endif %}">
+                                        <img 
+                                        src="{{product.item.icon.url}}"
+                                        style="max-width:320px;" 
+                                        class="img-fluid rounded-start " 
+                                        alt="..." />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card-body">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item p-4">
+                                                    <h3>{{product.item.name}}</h3>
+                                                </li>
+                                                <li class="list-group-item p-4">
+                                                    <a href="{% url 'shop_delete_item_cart' product.id product.item.name %}"
+                                                        class="text-decoration-none "
+                                                        style="color:red;"
+                                                        > 
+                                                            <h6>remove item </h6>
+                                                    
+                                                    </a>  
+                                                </li>
+
+                                            </ul>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        
+                                        <div class="card-body">
+                                            <ul class="list-group list-group-flush">
+
+                                                <li class="list-group-item ">
+                                                    <h5> Price: <small>${{product.item.price}}</small> </h5>
+                                                </li>
+                                                <li class="list-group-item ">
+                                                    {% if product.item.quantity > 0 %}
+                                                    
+                                                        <h5> In Stock: <small class="text-muted"> In Stock </small> </h5>
+                                                    
+                                                    {% else %}
+                                                        <h5> In Stock: <small class="text-muted"> Out of Stock </small> </h5>
+                                                    
+                                                    {% endif %}
+                                                </li>
+                                                <li class="list-group-item ">
+                                                    <h5> Quantity: <small class="text-muted"> {{product.quantity}} </small> </h5>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                            <div class="dropdown-divider"></div>
+
+                    
+                    
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+
+        {% endif %}
+
+
+
+{% endblock content %}
